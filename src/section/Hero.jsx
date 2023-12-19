@@ -2,7 +2,7 @@ import { IoShieldOutline } from "react-icons/io5";
 import HeroImage from "../assets/hero.svg";
 const Hero = () => {
     return (
-        <section className="font-manrope bg-[#effef1] h-[70vh] flex">
+        <section className="font-manrope bg-[#effef1] h-[70vh] flex pt-20">
             <main className="w-1/2 px-16 pt-16">
                 <div className="text-5xl font-semibold leading-[3.5rem]">
                     Modernizing Student Transportation to Make it Safe,
