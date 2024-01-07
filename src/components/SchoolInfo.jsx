@@ -1,9 +1,22 @@
 import React from "react";
+import { MdClose } from "react-icons/md";
+import { useRef } from "react";
 
 const SchoolInfo = ({ school }) => {
-    console.log(school);
+    const schoolInfoRef = useRef(null);
     return (
-        <article className="h-screen w-1/4 bg-white absolute left-0 z-20 shadow-md font-manrope flex flex-col items-center">
+        <article
+            className="h-screen w-1/2 bg-white absolute left-0 z-20 shadow-md font-manrope flex flex-col items-center"
+            ref={schoolInfoRef}
+        >
+            <div
+                className="absolute right-1 top-1"
+                onClick={() => {
+                    schoolInfoRef.current.style.display = "none";
+                }}
+            >
+                <MdClose className="text-2xl text-gray-400" />
+            </div>
             <div className="flex flex-col items-center mt-10">
                 <img
                     src={school.school_display_picture}

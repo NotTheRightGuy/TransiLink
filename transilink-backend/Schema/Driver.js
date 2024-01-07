@@ -9,12 +9,16 @@ const driverSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    avatar: {
+        type: String,
+        required: true,
+    },
     licenseNumber: {
         type: String,
         required: true,
         unique: true,
     },
-    school: {
+    schoolID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "School",
     },

@@ -44,6 +44,9 @@ const UserProfile = () => {
                                 Abhisekh Singh
                             </h3>
                             <p className="opacity-50 text-sm">Grade 9</p>
+                            <p className="opacity-50 text-xs">
+                                Studying at Kendriya Vidyalaya
+                            </p>
                         </div>
                     </li>
                     <li className="flex gap-4 items-center">
@@ -62,6 +65,10 @@ const UserProfile = () => {
                                 Anuradha Singh
                             </h3>
                             <p className="opacity-50 text-sm">Grade 12</p>
+                            <p className="opacity-50 text-xs">
+                                On her way to home <br />
+                                <span className="font-bold">ETA: 10 mins</span>
+                            </p>
                         </div>
                     </li>
                 </ul>
