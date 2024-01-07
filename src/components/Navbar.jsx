@@ -1,6 +1,6 @@
 const Navbar = () => {
     return (
-        <nav className="flex justify-between px-16 h-20 items-center fixed w-screen bg-white">
+        <nav className="flex justify-between px-16 h-20 items-center fixed w-screen bg-white z-10">
             <div className="font-Manropen font-semibold text-2xl">
                 Transi<span className="text-green-600">Link</span>
             </div>
