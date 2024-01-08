@@ -6,6 +6,7 @@ import currentSchool from "../atoms/currentSchool";
 import { useRecoilState } from "recoil";
 
 const Dashboard = () => {
+    const token = localStorage.getItem("token");
     useEffect(() => {
         if (localStorage.getItem("token") === "") {
             window.location.href = "/login";

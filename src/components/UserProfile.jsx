@@ -1,17 +1,21 @@
 import { IoStar } from "react-icons/io5";
 import { FaSchool } from "react-icons/fa";
 import { FaCarSide } from "react-icons/fa6";
+import { jwtDecode } from "jwt-decode";
 
 const UserProfile = () => {
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+
     return (
         <article className="h-screen w-1/4 bg-white absolute left-0 z-10 shadow-md font-manrope flex flex-col items-center">
             <img
-                src={`https://api.dicebear.com/7.x/micah/svg?seed=${Math.random()}`}
+                src={decoded.avatar}
                 alt="User Avatar"
                 className="h-48 w-48 rounded-full mx-auto mt-10 border-2 border-gray-100"
             />
             <h1 className="text-3xl pt-10 font-bold text-center opacity-80">
-                Mohanraj Singh
+                {decoded.full_name}
             </h1>
             <div className="mt-2 flex items-center gap-2">
                 <IoStar className="inline-block text-yellow-500" />
@@ -19,7 +23,7 @@ const UserProfile = () => {
             </div>
             <div className="px-10 flex-col text-center mt-4">
                 <p className="opacity-50 text-sm">
-                    C-606, Shree Siddhivinayak CHS, Sector 12, Kharghar
+                    {decoded.address.full_address}
                 </p>
             </div>
             {/* //* Student List */}

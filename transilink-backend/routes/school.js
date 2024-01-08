@@ -15,6 +15,16 @@ router.get("/get", (req, res) => {
         });
 });
 
+router.get("/getAll", (req, res) => {
+    School.find({})
+        .then((schools) => {
+            res.status(200).json(schools);
+        })
+        .catch((err) => {
+            res.status(500).json(err);
+        });
+});
+
 router.post("/add", (req, res) => {
     const schoolName = req.body.school_name;
     const schoolDisplayPicture = req.body.school_display_picture;

@@ -1,4 +1,3 @@
-import LoginImage from "../assets/login.jpg";
 import { useRef } from "react";
 
 const Login = () => {
@@ -9,7 +8,7 @@ const Login = () => {
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        fetch("http://localhost:8001/auth/login", {
+        fetch("http://localhost:8001/user/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,12 +31,32 @@ const Login = () => {
 
     return (
         <section className="h-screen flex">
-            <main className="bg-white w-1/2 ">
-                <img
-                    src={LoginImage}
-                    alt="Login Image"
-                    className="object-cover w-full h-full "
-                />
+            <button
+                className="absolute right-10 top-4 font-manrope font-bold text-sm"
+                onClick={() => {
+                    window.location.href = "/register";
+                }}
+            >
+                Register
+            </button>
+            <main className="bg-green-600 w-1/2 ">
+                <p
+                    className="absolute top-4 left-4 text-white font-bold text-2xl font-manrope cursor-pointer"
+                    onClick={() => {
+                        window.location.href = "/";
+                    }}
+                >
+                    TransiLink
+                </p>
+                <p className="absolute bottom-4 left-4 text-white font-bold text-lg font-manrope w-1/3 opacity-80">
+                    "I can't express how impressed I am with Transilink! As a
+                    frequent traveler, I've experienced various transportation
+                    options, but none have matched the level of professionalism
+                    and convenience provided by this exceptional service."
+                    <p className="text-sm opacity-70 mt-2">
+                        Janmejay Chatterjee
+                    </p>
+                </p>
             </main>
             <article className="flex flex-col py-64 px-20 font-manrope">
                 <h1 className="font-bold text-5xl">Login</h1>

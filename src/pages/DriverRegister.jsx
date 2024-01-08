@@ -1,54 +1,61 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { TextField } from "@mui/material";
+import AutoComplete from "@mui/material/Autocomplete";
 
-const Register = () => {
+const DriverRegister = () => {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const fullNameRef = useRef();
     const phoneNumberRef = useRef();
-    const emailRef = useRef();
-    const streetAddressRef = useRef();
-    const longitudeRef = useRef();
-    const latitudeRef = useRef();
+    const LicenseNumberRef = useRef();
+    const schoolRef = useRef();
 
-    const handleRegistration = (e) => {
-        const username = usernameRef.current.value;
-        const password = passwordRef.current.value;
-        const full_name = fullNameRef.current.value;
-        const contact_number = phoneNumberRef.current.value;
-        const email = emailRef.current.value;
-        const full_address = streetAddressRef.current.value;
-        const longitude = longitudeRef.current.value;
-        const latitude = latitudeRef.current.value;
+    const [allSchools, setAllSchools] = useState([]);
 
-        fetch("http://localhost:8001/user/auth/register", {
+    useEffect(() => {
+        fetch("http://localhost:8001/school/getAll")
+            .then((res) => res.json())
+            .then((data) => {
+                let schools = [];
+                data.forEach((school) => {
+                    schools.push({
+                        label: school.school_name,
+                        id: school._id,
+                    });
+                });
+                setAllSchools(schools);
+            });
+    }, []);
+
+    const registerDriver = () => {
+        const fullName = fullNameRef.current.value;
+        const phoneNumber = phoneNumberRef.current.value;
+        const LicenseNumber = LicenseNumberRef.current.value;
+        const schoolName = schoolRef.current.value;
+        const schoolId = allSchools.find(
+            (school) => school.label === schoolName
+        ).id;
+
+        const data = {
+            name: fullName,
+            phone_number: parseInt(phoneNumber),
+            license_number: parseInt(LicenseNumber),
+            school_id: schoolId,
+        };
+
+        fetch("http://localhost:8001/driver/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                username,
-                password,
-                full_name,
-                contact_number,
-                email,
-                address: {
-                    full_address,
-                    longitude,
-                    latitude,
-                },
-            }),
-        }).then((res) => {
-            if (res.ok) {
-                res.json().then((data) => {
-                    localStorage.setItem("token", data.JWT);
-                    window.location.href = "/register/child";
-                });
-            } else {
-                alert("Username already exists");
-            }
-        });
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                window.location.href = "/login";
+            });
     };
+
     return (
         <section className="h-screen flex">
             <button
@@ -69,17 +76,17 @@ const Register = () => {
                     TransiLink
                 </p>
                 <div className="absolute bottom-4 left-4 text-white font-bold text-lg font-manrope w-1/3 opacity-80">
-                    "Entrusting the safety of my child to any service is a
-                    decision I take very seriously. However, with Transilink, I
-                    have the utmost confidence and peace of mind, knowing that
-                    my child is in truly good hands."
-                    <p className="text-sm opacity-70 mt-2">Rohan Singhani</p>
+                    "I've been driving for Transilink for some time now, and I
+                    can't help but share how immensely fulfilling this
+                    experience has been for both me and the passengers I've had
+                    the pleasure of driving."
+                    <p className="text-sm opacity-70 mt-2">Mohan Lal Singh</p>
                 </div>
             </main>
             <article className="flex flex-col px-20 font-manrope pt-20">
-                <h1 className="text-3xl font-bold">Register</h1>
+                <h1 className="text-3xl font-bold">Driver Registeration</h1>
                 <p className="text-sm opacity-50 mb-10 mt-2">
-                    Create an account to continue
+                    Register yourself as a driver
                 </p>
                 <div className="flex gap-4 mb-4">
                     <TextField
@@ -106,42 +113,38 @@ const Register = () => {
                         inputRef={phoneNumberRef}
                     />
                     <TextField
-                        label="Email"
+                        label="License Number"
                         color="success"
-                        inputRef={emailRef}
+                        inputRef={LicenseNumberRef}
                         type="email"
                     />
                 </div>
-                <TextField
-                    label="Street Address"
-                    color="success"
-                    inputRef={streetAddressRef}
+                <AutoComplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={allSchools}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="School"
+                            inputRef={schoolRef}
+                        />
+                    )}
                 />
-                <div className="flex gap-4 mt-4">
-                    <TextField
-                        label="Longitude"
-                        color="success"
-                        inputRef={longitudeRef}
-                    />
-                    <TextField
-                        label="Latitude"
-                        color="success"
-                        inputRef={latitudeRef}
-                    />
-                </div>
+
                 <button
                     className="bg-green-600 py-4 text-white mt-4 rounded-md font-bold hover:bg-green-700 transition-colors"
-                    onClick={handleRegistration}
+                    onClick={registerDriver}
                 >
-                    Register Account
+                    Register As Driver
                 </button>
 
                 <p className="text-sm opacity-50 mt-4">
-                    Register as a driver instead{" "}
+                    Register as a parent instead{" "}
                     <span
                         className="text-green-600 cursor-pointer"
                         onClick={() => {
-                            window.location.href = "/register/driver";
+                            window.location.href = "/register";
                         }}
                     >
                         here
@@ -152,4 +155,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default DriverRegister;

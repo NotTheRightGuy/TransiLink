@@ -19,17 +19,6 @@ router.post("/auth/register", (req, res) => {
     const longitude = address.longitude;
     const latitude = address.latitude;
 
-    console.log(
-        username,
-        password,
-        fullName,
-        contactNumber,
-        email,
-        full_address,
-        longitude,
-        latitude
-    );
-
     User.findOne({ username: username }).then((user) => {
         if (user) {
             return res
@@ -94,6 +83,11 @@ router.post("/auth/login", (req, res) => {
                     {
                         id: user._id,
                         username: user.username,
+                        full_name: user.full_name,
+                        avatar: user.avatar,
+                        contact_number: user.contact_number,
+                        email: user.email,
+                        address: user.address,
                     },
                     JWT_SECRET,
                     {

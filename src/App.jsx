@@ -5,6 +5,8 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import ChildRegistration from "./pages/ChildRegistration";
+import DriverRegister from "./pages/DriverRegister";
 
 function App() {
     return (
@@ -15,6 +17,14 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route
+                        path="/register/child"
+                        element={<ChildRegistration />}
+                    />
+                    <Route
+                        path="/register/driver"
+                        element={<DriverRegister />}
+                    />
                     <Route path="*" element={<h1>404 Not Found</h1>} />
                 </Routes>
             </BrowserRouter>

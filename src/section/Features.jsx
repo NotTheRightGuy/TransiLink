@@ -6,7 +6,7 @@ import { MdShield } from "react-icons/md";
 const Features = () => {
     return (
         <section className="mt-20 font-manrope">
-            <p className="w-screen text-center text-3xl opacity-50 font-bold">
+            <p className="text-center text-3xl opacity-50 font-bold">
                 Features
             </p>
             <main className="">

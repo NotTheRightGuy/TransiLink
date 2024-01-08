@@ -4,12 +4,18 @@ import { useRef, useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import currentSchool from "../atoms/currentSchool";
 import { useRecoilState } from "recoil";
+import { jwtDecode } from "jwt-decode";
 
 const Map = () => {
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const latitude = decoded.address.latitude;
+    const longitude = decoded.address.longitude;
+
     const mapElement = useRef();
     const inputRef = useRef();
-    const [mapLongitude, setMapLongitude] = useState(72.571365);
-    const [mapLatitude, setMapLatitude] = useState(23.022505);
+    const [mapLongitude, setMapLongitude] = useState(latitude);
+    const [mapLatitude, setMapLatitude] = useState(longitude);
     const [mapZoom, setMapZoom] = useState(12);
     const [map, setMap] = useState({});
     const [schoolInfo, setSchoolInfo] = useState([]);

@@ -6,17 +6,17 @@ const router = Router();
 
 router.post("/add", (req, res) => {
     const name = req.body.name;
-    const age = req.body.age;
     const licenseNumber = req.body.license_number;
+    const phoneNumber = req.body.phone_number;
     const schoolID = req.body.school_id;
     const rating = 4;
 
-    if (!name || !age || !licenseNumber || !schoolID)
+    if (!name || !licenseNumber || !schoolID || !phoneNumber)
         return res.status(400).json({ error: "Missing fields" });
 
     const newDriver = new Driver({
         name: name,
-        age: age,
+        phone: phoneNumber,
         licenseNumber: licenseNumber,
         schoolID: schoolID,
         avatar: `https://api.dicebear.com/7.x/micah/svg?seed=${licenseNumber}`,

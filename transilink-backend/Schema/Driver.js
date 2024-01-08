@@ -5,9 +5,10 @@ const driverSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    age: {
+    phone: {
         type: Number,
         required: true,
+        unique: true,
     },
     avatar: {
         type: String,
