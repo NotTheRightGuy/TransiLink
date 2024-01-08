@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 const Map = () => {
     const token = localStorage.getItem("token");
     const decoded = jwtDecode(token);
+
     const latitude = decoded.address.latitude;
     const longitude = decoded.address.longitude;
 
@@ -87,8 +88,8 @@ const Map = () => {
             <div
                 className="p-2 border-b cursor-pointer hover:bg-gray-100 hover:rounded-xl"
                 onClick={() => {
-                    const lat = school.school_address[0].latitude;
-                    const lng = school.school_address[0].longitude;
+                    const lat = school.school_address.latitude;
+                    const lng = school.school_address.longitude;
                     setMapLatitude(lat);
                     setMapLongitude(lng);
                     dropPin(lng, lat);
@@ -99,7 +100,7 @@ const Map = () => {
             >
                 <h1 className="font-bold text-sm">{school.school_name}</h1>
                 <p className="text-xs text-gray-400">
-                    {school.school_address[0].address}
+                    {school.school_address.address}
                 </p>
             </div>
         );
@@ -123,11 +124,13 @@ const Map = () => {
                         <FaSearch className="absolute top-3 right-4 text-gray-400" />
                     </div>
                     <div className="bg-white rounded-xl font-manrope mt-1">
-                        {schoolInfo.length > 0
-                            ? schoolInfo.map((school) => (
-                                  <SchoolCard {...school} />
-                              ))
-                            : ""}
+                        {schoolInfo.length > 0 ? (
+                            schoolInfo.map((school) => (
+                                <SchoolCard key={school._id} {...school} />
+                            ))
+                        ) : (
+                            <> </>
+                        )}
                     </div>
                 </div>
                 <div className="absolute top-0 right-0 p-4 z-10">

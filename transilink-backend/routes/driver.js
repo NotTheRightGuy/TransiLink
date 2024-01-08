@@ -46,4 +46,20 @@ router.get("/get", (req, res) => {
         });
 });
 
+router.get("/get/:id", (req, res) => {
+    // Get school id froms params
+    // Give all drivers where schoolID = schoolID
+
+    let schoolID = req.params.id;
+    if (!schoolID)
+        return res.status(400).json({ error: "School ID not provided" });
+    Driver.find({ schoolID: schoolID })
+        .then((drivers) => {
+            res.status(200).json(drivers);
+        })
+        .catch((err) => {
+            res.status(500).json(err);
+        });
+});
+
 module.exports = router;
