@@ -13,7 +13,7 @@ const DriverRegister = () => {
     const [allSchools, setAllSchools] = useState([]);
 
     useEffect(() => {
-        fetch("https://transilink-backend.onrender.com/school/getAll")
+        fetch("http://localhost:8001/school/getAll")
             .then((res) => res.json())
             .then((data) => {
                 let schools = [];
@@ -43,7 +43,7 @@ const DriverRegister = () => {
             school_id: schoolId,
         };
 
-        fetch("https://transilink-backend.onrender.com/driver/add", {
+        fetch("http://localhost:8001/driver/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

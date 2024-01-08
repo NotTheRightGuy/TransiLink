@@ -1,41 +1,37 @@
 import { TextField, Button } from "@mui/material";
 import { useState, useRef } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const ChildRegistration = () => {
     const nameRef = useRef();
     const gradeRef = useRef();
     const ageRef = useRef();
-    const schoolRef = useRef();
 
     const addChild = () => {
         const name = nameRef.current.value;
         const grade = gradeRef.current.value;
         const age = ageRef.current.value;
-        const school = schoolRef.current.value;
 
         const token = localStorage.getItem("token");
+        const parentID = jwtDecode(token).id;
 
-        fetch("https://transilink-backend.onrender.com/child", {
+        fetch("http://localhost:8001/student/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                name,
+                fullName: name,
                 grade,
                 age,
-                school,
+                parentID,
             }),
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.success) {
-                    alert("Child added successfully");
-                    window.location.href = "/dashboard";
-                } else {
-                    alert(data.message);
-                }
+                alert("Child added successfully");
+                console.log(data);
             });
     };
 
@@ -106,12 +102,12 @@ const ChildRegistration = () => {
                         />
                     </div>
 
-                    <TextField
+                    {/* <TextField
                         label="School"
                         className="w-full mb-4"
                         color="success"
                         inputRef={schoolRef}
-                    />
+                    /> */}
                     <div className="mt-4">
                         <Button
                             variant="contained"
@@ -120,6 +116,18 @@ const ChildRegistration = () => {
                             onClick={addChild}
                         >
                             Add Child
+                        </Button>
+                    </div>
+                    <div className="mt-4">
+                        <Button
+                            variant="contained"
+                            className="w-full"
+                            color="success"
+                            onClick={() => {
+                                window.location.href = "/dashboard";
+                            }}
+                        >
+                            Proceed to Dashboard
                         </Button>
                     </div>
                 </div>

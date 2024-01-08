@@ -70,7 +70,7 @@ const Map = () => {
     const getSchoolInfo = async () => {
         const schoolName = inputRef.current.value;
         const response = await fetch(
-            `https://transilink-backend.onrender.com/school/get?schoolName=${schoolName}`
+            `http://localhost:8001/school/get?schoolName=${schoolName}`
         );
         const data = await response.json();
         return data;
