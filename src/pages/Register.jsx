@@ -21,7 +21,7 @@ const Register = () => {
         const longitude = longitudeRef.current.value;
         const latitude = latitudeRef.current.value;
 
-        fetch("http://localhost:8001/user/auth/register", {
+        fetch("https://transilink-backend.onrender.com/user/auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -9,7 +9,9 @@ const SchoolInfo = ({ school }) => {
     const [drivers, setDrivers] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8001/driver/get/${school._id}`)
+        fetch(
+            `https://transilink-backend.onrender.com/driver/get/${school._id}`
+        )
             .then((res) => res.json())
             .then((data) => {
                 setDrivers(data);

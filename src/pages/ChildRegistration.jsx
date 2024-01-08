@@ -15,7 +15,7 @@ const ChildRegistration = () => {
 
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8001/child", {
+        fetch("https://transilink-backend.onrender.com/child", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
